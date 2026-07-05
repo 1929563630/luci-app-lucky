@@ -24,7 +24,7 @@ define Package/$(PKG_NAME)/postinst
 INITD=/etc/init.d
 $${INITD}/lucky enable
 $${INITD}/lucky start 2>/dev/null || true
-$${INITD}/rpcd restart 2>/dev/null || true
+( sleep 3; $${INITD}/rpcd restart ) >/dev/null 2>&1 < /dev/null &
 rm -rf /tmp/luci-*
 exit 0
 endef
